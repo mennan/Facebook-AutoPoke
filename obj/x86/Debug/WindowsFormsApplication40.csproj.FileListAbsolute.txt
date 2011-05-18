@@ -1,0 +1,9 @@
+c:\users\men-ek\documents\visual studio 2010\Projects\WindowsFormsApplication40\WindowsFormsApplication40\obj\x86\Debug\ResolveAssemblyReference.cache
+c:\users\men-ek\documents\visual studio 2010\Projects\WindowsFormsApplication40\WindowsFormsApplication40\obj\x86\Debug\GenerateResource.read.1.tlog
+c:\users\men-ek\documents\visual studio 2010\Projects\WindowsFormsApplication40\WindowsFormsApplication40\obj\x86\Debug\GenerateResource.write.1.tlog
+c:\users\men-ek\documents\visual studio 2010\Projects\WindowsFormsApplication40\WindowsFormsApplication40\bin\Debug\WindowsFormsApplication40.exe
+c:\users\men-ek\documents\visual studio 2010\Projects\WindowsFormsApplication40\WindowsFormsApplication40\bin\Debug\WindowsFormsApplication40.pdb
+c:\users\men-ek\documents\visual studio 2010\Projects\WindowsFormsApplication40\WindowsFormsApplication40\obj\x86\Debug\WindowsFormsApplication40.exe
+c:\users\men-ek\documents\visual studio 2010\Projects\WindowsFormsApplication40\WindowsFormsApplication40\obj\x86\Debug\WindowsFormsApplication40.pdb
+C:\Users\Men-ek\documents\visual studio 2010\Projects\WindowsFormsApplication40\WindowsFormsApplication40\obj\x86\Debug\AutoPoke.Properties.Resources.resources
+C:\Users\Men-ek\documents\visual studio 2010\Projects\WindowsFormsApplication40\WindowsFormsApplication40\obj\x86\Debug\AutoPoke.Form1.resources
