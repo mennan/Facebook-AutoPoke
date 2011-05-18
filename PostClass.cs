@@ -11,6 +11,7 @@ namespace AutoPoke
     {
         private static CookieContainer cc = new CookieContainer();
 
+        //POST işlemleri için
         public static string HttpRequest(string Address, string Data)
         {
             string source;
@@ -55,38 +56,39 @@ namespace AutoPoke
             return source;
         }
 
-        //UserID uzunluğunu alan function
-        public static int StrCount(string text, string pattern)
+        //GET işlemleri için
+        public static string HttpRequest(string Address)
         {
-            int num = 0;
-            int startIndex = 0;
-            while ((startIndex = text.IndexOf(pattern, startIndex)) != -1)
-            {
-                startIndex += pattern.Length;
-                num++;
-            }
-            return num;
-        }
+            string source;
 
-        //UserID alanını text'ten ayıran function
-        public static string Split(string msg, string delim, int part)
-        {
-            try
+            HttpWebRequest WebReq = (HttpWebRequest)WebRequest.Create(Address);
+            WebReq.CookieContainer = cc;
+            WebReq.Method = "GET";
+
+            WebReq.UserAgent = "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.1.3) Gecko/20090824 Firefox/3.5.3";
+
+            WebReq.ContentType = "application/x-www-form-urlencoded";
+            WebReq.Referer = "http://www.facebook.com/";
+            WebReq.KeepAlive = true;
+
+            WebReq.AllowAutoRedirect = true;
+
+            HttpWebResponse response = (HttpWebResponse)WebReq.GetResponse();
+
+            cc.SetCookies(WebReq.Address, "Set-Cookie");
+
+            foreach (string cookie in response.Headers.AllKeys)
             {
-                for (int i = 0; i < part; i++)
-                {
-                    msg = msg.Substring(msg.IndexOf(delim) + delim.Length);
-                }
-                if (msg.IndexOf(delim) == -1)
-                {
-                    return msg;
-                }
-                return msg.Substring(0, msg.IndexOf(delim));
+                string val = response.Headers[cookie].ToString();
+                response.Cookies.Add(new Cookie(cookie, val));
             }
-            catch
+
+            using (StreamReader reader = new StreamReader(response.GetResponseStream()))
             {
-                return "";
+                source = reader.ReadToEnd();
             }
+
+            return source;
         }
     }
 }
