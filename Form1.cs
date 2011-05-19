@@ -26,7 +26,7 @@ namespace AutoPoke
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -53,25 +53,25 @@ namespace AutoPoke
 
         private void GetLastPokeYou()
         {
-            result = PostClass.HttpRequest("http://m.facebook.com", "");
+            result = PostClass.HttpRequest("http://m.facebook.com");
         }
 
         private void Poke()
         {
             GetLastPokeYou();
 
-            Regex rg = new Regex("poke=(.*?)&amp;");
+            Regex rg = new Regex("poke=(?<uid>[^<]*)&amp;gfid=(?<gfid>[^<]*)&amp;refid=(?<refid>[^<]*)");
             MatchCollection m = rg.Matches(result);
 
             List<string> UserID = new List<string>();
+            List<string> Gfid = new List<string>();
+            List<string> RefID = new List<string>();
 
             foreach (Match item in m)
             {
-                string r = item.Groups[0].ToString();
-                string[] id = r.Split('=');
-                id = id[1].Split('&');
-
-                UserID.Add(id[0]);
+                UserID.Add(item.Groups[1].Value);
+                Gfid.Add(item.Groups[2].Value);
+                RefID.Add(item.Groups[3].Value);
             }
 
             //Poke
@@ -83,13 +83,11 @@ namespace AutoPoke
                 return;
             }
 
-            //Dürtülecek kişi varsa dürt!!!
-            foreach (string item in UserID)
+            for (int i = 0; i < UserID.Count; i++)
             {
-                //textBox3.Text = PostClass.HttpRequest("http://facebook.com/ajax/poke.php?__a=1", String.Format("post_form_id=7a0fb076716c78523c08d48672af3f3f&uid={0}&pokeback=1&opp=&pk01=Poke&__d=1&fb_dtsg=kVdpn&lsd&post_form_id_source=AsyncRequest", item));
-                string poke_result = PostClass.HttpRequest(String.Format("http://m.facebook.com/a/notifications.php?poke={0}&gfid=9a33de6421&refid=0", item));
+                string poke_result = PostClass.HttpRequest(String.Format("http://m.facebook.com/a/notifications.php?poke={0}&gfid={1}&refid={2}\"", UserID[i], Gfid[i], RefID[i]));
 
-                listBox1.Items.Add(String.Format("{0} {1} dürtüldü.", DateTime.Now.ToShortTimeString(), item));
+                listBox1.Items.Add(String.Format("{0} {1} dürtüldü.", DateTime.Now.ToShortTimeString(), Facebook.GetNameByUserID(UserID[i])));
             }
         }
 
