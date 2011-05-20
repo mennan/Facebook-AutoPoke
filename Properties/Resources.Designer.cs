@@ -59,5 +59,12 @@ namespace AutoPoke.Properties {
                 resourceCulture = value;
             }
         }
+        
+        internal static System.Drawing.Bitmap FaceBook {
+            get {
+                object obj = ResourceManager.GetObject("FaceBook", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

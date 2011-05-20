@@ -26,7 +26,13 @@ namespace AutoPoke
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            this.SizeChanged += new EventHandler(Form1_SizeChanged);
+        }
 
+        void Form1_SizeChanged(object sender, EventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Minimized)
+                this.Hide();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -96,27 +102,19 @@ namespace AutoPoke
             Poke();
         }
 
-        //Form Minimize edildiği zaman çalışacak fonksiyon
-        [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.UnmanagedCode)]
-        protected override void WndProc(ref Message m)
-        {
-            switch (m.Msg)
-            {
-                case WM_SYSCOMMAND:
-                    int command = m.WParam.ToInt32() & 0xfff0;
-                    if (command == SC_MINIMIZE)
-                    {
-                        this.Hide();
-                        return;
-                    }
-                    break;
-            }
-            base.WndProc(ref m);
-        }
-
         private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            this.ShowDialog();
+            this.Show();
+        }
+
+        private void çıkışToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Dispose();
+        }
+
+        private void facebookAutoPokeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Show();
         }
     }
 }
