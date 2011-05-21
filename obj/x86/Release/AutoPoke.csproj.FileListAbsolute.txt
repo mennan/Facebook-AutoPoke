@@ -1,0 +1,11 @@
+C:\Users\Men-ek\Documents\Visual Studio 2010\Projects\WindowsFormsApplication40\WindowsFormsApplication40\bin\Release\AutoPoke.exe
+C:\Users\Men-ek\Documents\Visual Studio 2010\Projects\WindowsFormsApplication40\WindowsFormsApplication40\bin\Release\AutoPoke.pdb
+C:\Users\Men-ek\Documents\Visual Studio 2010\Projects\WindowsFormsApplication40\WindowsFormsApplication40\bin\Release\Newtonsoft.Json.Net35.dll
+C:\Users\Men-ek\Documents\Visual Studio 2010\Projects\WindowsFormsApplication40\WindowsFormsApplication40\obj\x86\Release\ResolveAssemblyReference.cache
+C:\Users\Men-ek\Documents\Visual Studio 2010\Projects\WindowsFormsApplication40\WindowsFormsApplication40\obj\x86\Release\AutoPoke.Form1.resources
+C:\Users\Men-ek\Documents\Visual Studio 2010\Projects\WindowsFormsApplication40\WindowsFormsApplication40\obj\x86\Release\AutoPoke.friendList.resources
+C:\Users\Men-ek\Documents\Visual Studio 2010\Projects\WindowsFormsApplication40\WindowsFormsApplication40\obj\x86\Release\AutoPoke.Properties.Resources.resources
+C:\Users\Men-ek\Documents\Visual Studio 2010\Projects\WindowsFormsApplication40\WindowsFormsApplication40\obj\x86\Release\GenerateResource.read.1.tlog
+C:\Users\Men-ek\Documents\Visual Studio 2010\Projects\WindowsFormsApplication40\WindowsFormsApplication40\obj\x86\Release\GenerateResource.write.1.tlog
+C:\Users\Men-ek\Documents\Visual Studio 2010\Projects\WindowsFormsApplication40\WindowsFormsApplication40\obj\x86\Release\AutoPoke.exe
+C:\Users\Men-ek\Documents\Visual Studio 2010\Projects\WindowsFormsApplication40\WindowsFormsApplication40\obj\x86\Release\AutoPoke.pdb

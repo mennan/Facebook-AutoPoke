@@ -24,6 +24,7 @@ namespace AutoPoke
             FacebookDelegate fd = delegate
             {
                 List<FacebookFriends> f = Facebook.GetFriendList();
+                List<string> xml = XML.ReadXML();
                 int top = 0;
 
                 foreach (FacebookFriends item in f)
@@ -33,6 +34,10 @@ namespace AutoPoke
                     c.Top = top;
                     c.Text = "";
                     c.Width = 20;
+
+                    string id = xml.Find(x => x == item.i);
+                    if (!String.IsNullOrEmpty(id))
+                        c.Checked = true;
 
                     Image img = Facebook.GetUserProfilePhoto(item.i);
 
@@ -66,9 +71,31 @@ namespace AutoPoke
                     {
                         panel1.Controls.Add(item);
                     };
+
                     panel1.Invoke(method);
                 }
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            List<string> users = new List<string>();
+
+            foreach (var item in panel1.Controls)
+            {
+                if (item is CheckBox)
+                {
+                    CheckBox c = item as CheckBox;
+
+                    if (c.Checked)
+                        users.Add(c.Name.ToString());
+                }
+            }
+
+            if (users.Count != 0)
+                XML.WriteXML(users);
+
+            this.Hide();
         }
     }
 }
