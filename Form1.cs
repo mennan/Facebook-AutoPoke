@@ -21,8 +21,6 @@ namespace AutoPoke
         }
 
         string result = null;
-        private const int WM_SYSCOMMAND = 0x0112;
-        private const int SC_MINIMIZE = 0xF020;
 
         private void Form1_Load(object sender, EventArgs e)
         {

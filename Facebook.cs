@@ -43,7 +43,6 @@ namespace AutoPoke
 
         public static List<FacebookFriends> GetFriendList()
         {
-            PostClass.HttpRequest("http://m.facebook.com/login.php", "email=mennan.kose&pass=fenerbahce1907");
             string fl = PostClass.HttpRequest("http://www.facebook.com/ajax/typeahead_friends.php?&__a=1");
 
             fl = fl.Replace("for (;;);{\"__ar\":1,\"payload\":", String.Empty);
