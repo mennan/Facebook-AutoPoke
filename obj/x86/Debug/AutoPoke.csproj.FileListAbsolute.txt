@@ -1,10 +1,11 @@
-C:\Users\Men-ek\documents\visual studio 2010\Projects\WindowsFormsApplication40\WindowsFormsApplication40\bin\Debug\WindowsFormsApplication40.exe
-C:\Users\Men-ek\documents\visual studio 2010\Projects\WindowsFormsApplication40\WindowsFormsApplication40\bin\Debug\WindowsFormsApplication40.pdb
 C:\Users\Men-ek\documents\visual studio 2010\Projects\WindowsFormsApplication40\WindowsFormsApplication40\obj\x86\Debug\ResolveAssemblyReference.cache
 C:\Users\Men-ek\documents\visual studio 2010\Projects\WindowsFormsApplication40\WindowsFormsApplication40\obj\x86\Debug\AutoPoke.Form1.resources
 C:\Users\Men-ek\documents\visual studio 2010\Projects\WindowsFormsApplication40\WindowsFormsApplication40\obj\x86\Debug\AutoPoke.Properties.Resources.resources
 C:\Users\Men-ek\documents\visual studio 2010\Projects\WindowsFormsApplication40\WindowsFormsApplication40\obj\x86\Debug\GenerateResource.read.1.tlog
 C:\Users\Men-ek\documents\visual studio 2010\Projects\WindowsFormsApplication40\WindowsFormsApplication40\obj\x86\Debug\GenerateResource.write.1.tlog
-C:\Users\Men-ek\documents\visual studio 2010\Projects\WindowsFormsApplication40\WindowsFormsApplication40\obj\x86\Debug\WindowsFormsApplication40.exe
-C:\Users\Men-ek\documents\visual studio 2010\Projects\WindowsFormsApplication40\WindowsFormsApplication40\obj\x86\Debug\WindowsFormsApplication40.pdb
 C:\Users\Men-ek\documents\visual studio 2010\Projects\WindowsFormsApplication40\WindowsFormsApplication40\bin\Debug\Newtonsoft.Json.Net35.dll
+C:\Users\Men-ek\Documents\Visual Studio 2010\Projects\WindowsFormsApplication40\WindowsFormsApplication40\bin\Debug\AutoPoke.exe
+C:\Users\Men-ek\Documents\Visual Studio 2010\Projects\WindowsFormsApplication40\WindowsFormsApplication40\bin\Debug\AutoPoke.pdb
+C:\Users\Men-ek\Documents\Visual Studio 2010\Projects\WindowsFormsApplication40\WindowsFormsApplication40\obj\x86\Debug\AutoPoke.exe
+C:\Users\Men-ek\Documents\Visual Studio 2010\Projects\WindowsFormsApplication40\WindowsFormsApplication40\obj\x86\Debug\AutoPoke.pdb
+C:\Users\Men-ek\Documents\Visual Studio 2010\Projects\WindowsFormsApplication40\WindowsFormsApplication40\obj\x86\Debug\AutoPoke.friendList.resources

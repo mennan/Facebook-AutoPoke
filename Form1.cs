@@ -116,5 +116,11 @@ namespace AutoPoke
         {
             this.Show();
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            friendList f = new friendList();
+            f.ShowDialog();
+        }
     }
 }
