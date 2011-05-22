@@ -187,7 +187,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(306, 35);
+            this.button2.Location = new System.Drawing.Point(245, 25);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(153, 23);
             this.button2.TabIndex = 2;
@@ -200,8 +200,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(926, 484);
-            this.Controls.Add(this.button2);
             this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.listBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;

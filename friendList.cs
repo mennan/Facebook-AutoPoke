@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.IO;
 
 namespace AutoPoke
 {
@@ -17,6 +18,25 @@ namespace AutoPoke
         public friendList()
         {
             InitializeComponent();
+        }
+
+        private void Isaretle()
+        {
+            List<string> users = new List<string>();
+
+            foreach (var item in panel1.Controls)
+            {
+                if (item is CheckBox)
+                {
+                    CheckBox c = item as CheckBox;
+
+                    if (c.Checked)
+                        users.Add(c.Name.ToString());
+                }
+            }
+
+            if (users.Count != 0)
+                XML.WriteXML(users);
         }
 
         private void friendList_Load(object sender, EventArgs e)
@@ -79,23 +99,38 @@ namespace AutoPoke
 
         private void button1_Click(object sender, EventArgs e)
         {
-            List<string> users = new List<string>();
-
-            foreach (var item in panel1.Controls)
-            {
-                if (item is CheckBox)
-                {
-                    CheckBox c = item as CheckBox;
-
-                    if (c.Checked)
-                        users.Add(c.Name.ToString());
-                }
-            }
-
-            if (users.Count != 0)
-                XML.WriteXML(users);
+            Isaretle();
 
             this.Hide();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog open = new OpenFileDialog();
+
+            open.Filter = "XML Dosyası|*.xml";
+            DialogResult d = open.ShowDialog();
+
+            if(d == System.Windows.Forms.DialogResult.OK)
+                File.Copy(open.FileName, Application.StartupPath + @"\users.xml");
+
+            foreach (Control item in panel1.Controls)
+            {
+                if (item is CheckBox)
+                    (item as CheckBox).Checked = false;
+            }
+
+            Isaretle();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog save = new SaveFileDialog();
+            save.Filter = "XML Dosyası|*.xml";
+            DialogResult d = save.ShowDialog();
+
+            if (d == System.Windows.Forms.DialogResult.OK)
+                File.Copy(Application.StartupPath + @"\users.xml", save.FileName);
         }
     }
 }
