@@ -61,31 +61,38 @@ namespace AutoPoke
         {
             string source;
 
-            HttpWebRequest WebReq = (HttpWebRequest)WebRequest.Create(Address);
-            WebReq.CookieContainer = cc;
-            WebReq.Method = "GET";
-
-            WebReq.UserAgent = "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.1.3) Gecko/20090824 Firefox/3.5.3";
-
-            WebReq.ContentType = "application/x-www-form-urlencoded";
-            WebReq.Referer = "http://www.facebook.com/";
-            WebReq.KeepAlive = true;
-
-            WebReq.AllowAutoRedirect = true;
-
-            HttpWebResponse response = (HttpWebResponse)WebReq.GetResponse();
-
-            cc.SetCookies(WebReq.Address, "Set-Cookie");
-
-            foreach (string cookie in response.Headers.AllKeys)
+            try
             {
-                string val = response.Headers[cookie].ToString();
-                response.Cookies.Add(new Cookie(cookie, val));
+                HttpWebRequest WebReq = (HttpWebRequest)WebRequest.Create(Address);
+                WebReq.CookieContainer = cc;
+                WebReq.Method = "GET";
+
+                WebReq.UserAgent = "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.1.3) Gecko/20090824 Firefox/3.5.3";
+
+                WebReq.ContentType = "application/x-www-form-urlencoded";
+                WebReq.Referer = "http://www.facebook.com/";
+                WebReq.KeepAlive = true;
+
+                WebReq.AllowAutoRedirect = true;
+
+                HttpWebResponse response = (HttpWebResponse)WebReq.GetResponse();
+
+                cc.SetCookies(WebReq.Address, "Set-Cookie");
+
+                foreach (string cookie in response.Headers.AllKeys)
+                {
+                    string val = response.Headers[cookie].ToString();
+                    response.Cookies.Add(new Cookie(cookie, val));
+                }
+
+                using (StreamReader reader = new StreamReader(response.GetResponseStream()))
+                {
+                    source = reader.ReadToEnd();
+                }
             }
-
-            using (StreamReader reader = new StreamReader(response.GetResponseStream()))
+            finally
             {
-                source = reader.ReadToEnd();
+                ;
             }
 
             return source;

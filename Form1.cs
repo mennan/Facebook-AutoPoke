@@ -43,7 +43,7 @@ namespace AutoPoke
 
             result = PostClass.HttpRequest("http://m.facebook.com/login.php", String.Format("email={0}&pass={1}", textBox1.Text, textBox2.Text));
 
-            if (result.Contains("pass"))
+            if (result.Contains("password"))
             {
                 MessageBox.Show("Kullanıcı adı veya şifre hatalı");
                 return;
@@ -104,8 +104,8 @@ namespace AutoPoke
             for (int i = 0; i < UserID.Count; i++)
             {
                 string poke_result = PostClass.HttpRequest(String.Format("http://m.facebook.com/a/notifications.php?poke={0}&gfid={1}&refid={2}\"", UserID[i], Gfid[i], RefID[i]));
-
-                listBox1.Items.Add(String.Format("{0} {1} dürtüldü.", DateTime.Now.ToShortTimeString(), Facebook.GetNameByUserID(UserID[i])));
+                string user_name = Facebook.GetNameByUserID(UserID[i]);
+                listBox1.Items.Add(String.Format("{0} {1} dürtüldü.", DateTime.Now.ToShortTimeString(), user_name));
             }
 
             timer1.Enabled = false;
@@ -124,34 +124,18 @@ namespace AutoPoke
         //UserID bilgisine göre dürtme işlemi
         private void Poke(string UID)
         {
-            //string r = PostClass.HttpRequest(String.Format("http://m.facebook.com/profile.php?id={0}", UID));
-            //Regex rg = new Regex(String.Format("id={0}&amp;gfid=(?<uid>[^<]*)&amp", UID));
-            //MatchCollection m = rg.Matches(r);
-
-            //string Gfid = null;
-
-            //foreach (Match item in m)
-            //{
-            //    Gfid = item.Groups[1].Value;
-            //}
-            //MessageBox.Show(String.Format("http://m.facebook.com/a/profile.php?poke&id={0}&gfid={1}&refid=17\"", UID, Gfid));
-            //textBox3.Text = PostClass.HttpRequest(String.Format("http://m.facebook.com/a/profile.php?poke&id={0}&gfid={1}&refid=17&__ajax__&__m_async_page__&__metablock__=3", UID, Gfid));
-
-            //name="fb_dtsg" value="AQDcWZlG"
-
-            string r = PostClass.HttpRequest(String.Format("http://www.facebook.com/profile.php?id={0}&poke=1", UID));
-            Match m = Regex.Match(r, "id=\"post_form_id\" name=\"post_form_id\" value=\"(?<refid>[^<]*)\"", RegexOptions.IgnoreCase);
+            string r = PostClass.HttpRequest(String.Format("http://m.facebook.com/profile.php?id={0}", UID));
+            Match m = Regex.Match(r, "gfid=(?<refid>[^<]*)&amp;", RegexOptions.IgnoreCase);
             string form_id = m.Groups[1].Value;
 
-            m = Regex.Match(r, "name=\"fb_dtsg\" value=\"(?<refid>[^<]*)\" autocomplete=\"off\"", RegexOptions.IgnoreCase);
-            string f = m.Groups[1].Value;
+            string poke_result = PostClass.HttpRequest(String.Format("http://m.facebook.com/a/profile.php?poke&id={0}&gfid={1}&refid=0", UID, form_id));
 
-            string poke_result = PostClass.HttpRequest("http://www.facebook.com/ajax/poke.php?__a=1", String.Format("post_form_id={0}&uid={1}&pokeback=0&opp=&pk01=Poke&__d=1&fb_dtsg={2}&lsd=&post_form_id_source=AsyncRequest", form_id, UID, "AQDcWZlG"));
+            string user_name = Facebook.GetNameByUserID(UID);
 
-            if(poke_result.Contains("You have poked"))
-                AddItemToListBox(String.Format("{0} {1} dürtüldü.", DateTime.Now.ToShortTimeString(), Facebook.GetNameByUserID(UID)));
+            if (poke_result.Contains("You have poked"))
+                AddItemToListBox(String.Format("{0} {1} dürtüldü.", DateTime.Now.ToShortTimeString(), user_name));
             else
-                AddItemToListBox(String.Format("{0} {1} zaten dürtülmüş!", DateTime.Now.ToShortTimeString(), Facebook.GetNameByUserID(UID)));
+                AddItemToListBox(String.Format("{0} {1} zaten dürtülmüş!", DateTime.Now.ToShortTimeString(), user_name));
         }
 
         private void timer1_Tick(object sender, EventArgs e)

@@ -54,9 +54,9 @@
             // listBox1
             // 
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(12, 143);
+            this.listBox1.Location = new System.Drawing.Point(13, 143);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(902, 329);
+            this.listBox1.Size = new System.Drawing.Size(901, 329);
             this.listBox1.TabIndex = 0;
             // 
             // groupBox1
@@ -227,13 +227,13 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.NotifyIcon notifyIcon1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem facebookAutoPokeToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem çıkışToolStripMenuItem;
         private System.Windows.Forms.Button button2;
+        public System.Windows.Forms.Timer timer1;
 
 
     }

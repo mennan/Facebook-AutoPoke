@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.IO;
+using System.Threading;
 
 namespace AutoPoke
 {
@@ -41,44 +42,45 @@ namespace AutoPoke
 
         private void friendList_Load(object sender, EventArgs e)
         {
-            FacebookDelegate fd = delegate
-            {
-                List<FacebookFriends> f = Facebook.GetFriendList();
-                List<string> xml = XML.ReadXML();
-                int top = 0;
-
-                foreach (FacebookFriends item in f)
-                {
-                    CheckBox c = new CheckBox();
-                    c.Name = item.i;
-                    c.Top = top;
-                    c.Text = "";
-                    c.Width = 20;
-
-                    string id = xml.Find(x => x == item.i);
-                    if (!String.IsNullOrEmpty(id))
-                        c.Checked = true;
-
-                    Image img = Facebook.GetUserProfilePhoto(item.i);
-
-                    PictureBox p = new PictureBox();
-                    p.Top = top;
-                    p.Image = img;
-                    p.Left = 35;
-
-                    Label lbl = new Label();
-                    lbl.Text = item.t;
-                    lbl.Top = top;
-                    lbl.Left = 140;
-
-                    KontrolEkle(c, p, lbl);
-                    top += 70;
-                }
-            };
-
-            fd.BeginInvoke(null, this);
+            Thread t = new Thread(new ThreadStart(ArkadasListesiniAl));
+            t.Start();
 
             panel1.AutoScroll = true;
+        }
+
+        private void ArkadasListesiniAl()
+        {
+            List<FacebookFriends> f = Facebook.GetFriendList();
+            List<string> xml = XML.ReadXML();
+            int top = 0;
+
+            foreach (FacebookFriends item in f)
+            {
+                CheckBox c = new CheckBox();
+                c.Name = item.i;
+                c.Top = top;
+                c.Text = "";
+                c.Width = 20;
+
+                string id = xml.Find(x => x == item.i);
+                if (!String.IsNullOrEmpty(id))
+                    c.Checked = true;
+
+                Image img = Facebook.GetUserProfilePhoto(item.i);
+
+                PictureBox p = new PictureBox();
+                p.Top = top;
+                p.Image = img;
+                p.Left = 35;
+
+                Label lbl = new Label();
+                lbl.Text = item.t;
+                lbl.Top = top;
+                lbl.Left = 140;
+
+                KontrolEkle(c, p, lbl);
+                top += 70;
+            }
         }
 
         public void KontrolEkle(params Control[] ctrl)
@@ -111,7 +113,7 @@ namespace AutoPoke
             open.Filter = "XML Dosyası|*.xml";
             DialogResult d = open.ShowDialog();
 
-            if(d == System.Windows.Forms.DialogResult.OK)
+            if (d == System.Windows.Forms.DialogResult.OK)
                 File.Copy(open.FileName, Application.StartupPath + @"\users.xml");
 
             foreach (Control item in panel1.Controls)
