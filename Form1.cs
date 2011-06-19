@@ -103,7 +103,7 @@ namespace AutoPoke
 
             for (int i = 0; i < UserID.Count; i++)
             {
-                string poke_result = PostClass.HttpRequest(String.Format("http://m.facebook.com/a/notifications.php?poke={0}&gfid={1}&refid={2}\"", UserID[i], Gfid[i], RefID[i]));
+                string poke_result = PostClass.HttpRequest(String.Format("http://m.facebook.com/a/notifications.php?poke={0}&gfid={1}&refid=17\"", UserID[i], Gfid[i]));
                 string user_name = Facebook.GetNameByUserID(UserID[i]);
                 listBox1.Items.Add(String.Format("{0} {1} dürtüldü.", DateTime.Now.ToShortTimeString(), user_name));
             }
@@ -124,18 +124,31 @@ namespace AutoPoke
         //UserID bilgisine göre dürtme işlemi
         private void Poke(string UID)
         {
-            string r = PostClass.HttpRequest(String.Format("http://m.facebook.com/profile.php?id={0}", UID));
-            Match m = Regex.Match(r, "gfid=(?<refid>[^<]*)&amp;", RegexOptions.IgnoreCase);
-            string form_id = m.Groups[1].Value;
+            string r = PostClass.HttpRequest(String.Format("http://www.facebook.com/"));
+           
+            Regex rg = new Regex("autocomplete=\"off\" name=\"post_form_id\" value=\"(?<gfid>[^<]*)\"");
+            Match m = rg.Match(r);
 
-            string poke_result = PostClass.HttpRequest(String.Format("http://m.facebook.com/a/profile.php?poke&id={0}&gfid={1}&refid=0", UID, form_id));
+            List<string> form_id = new List<string>();
+            List<string> fb_dtsg = new List<string>();
+
+            form_id.Add(m.Groups[1].Value);
+
+            rg = new Regex("type=\"hidden\" name=\"fb_dtsg\" value=\"(?<gfid>[^<]*)\" autocomplete=\"off\"");
+            m = rg.Match(r);
+
+            fb_dtsg.Add(m.Groups[1].Value);
+
+            string poke_result = PostClass.HttpRequest("http://www.facebook.com/ajax/poke.php?__a=1", String.Format("post_form_id={0}&uid={1}&pokeback=1&opp=&pk01=Poke&__d=1&fb_dtsg={2}&lsd&post_form_id_source=AsyncRequest", form_id[0], UID, fb_dtsg[0]));
 
             string user_name = Facebook.GetNameByUserID(UID);
 
             if (poke_result.Contains("You have poked"))
                 AddItemToListBox(String.Format("{0} {1} dürtüldü.", DateTime.Now.ToShortTimeString(), user_name));
-            else
+            else if (poke_result.Contains("has not received your last poke yet"))
                 AddItemToListBox(String.Format("{0} {1} zaten dürtülmüş!", DateTime.Now.ToShortTimeString(), user_name));
+            else
+                AddItemToListBox(String.Format("{0} Hata oluştu!!!", DateTime.Now.ToShortTimeString()));
         }
 
         private void timer1_Tick(object sender, EventArgs e)
