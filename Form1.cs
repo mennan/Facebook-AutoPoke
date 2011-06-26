@@ -103,9 +103,7 @@ namespace AutoPoke
 
             for (int i = 0; i < UserID.Count; i++)
             {
-                string poke_result = PostClass.HttpRequest(String.Format("http://m.facebook.com/a/notifications.php?poke={0}&gfid={1}&refid=17\"", UserID[i], Gfid[i]));
-                string user_name = Facebook.GetNameByUserID(UserID[i]);
-                listBox1.Items.Add(String.Format("{0} {1} dürtüldü.", DateTime.Now.ToShortTimeString(), user_name));
+                Poke(UserID[i]);
             }
 
             timer1.Enabled = false;
@@ -125,7 +123,7 @@ namespace AutoPoke
         private void Poke(string UID)
         {
             string r = PostClass.HttpRequest(String.Format("http://www.facebook.com/"));
-           
+
             Regex rg = new Regex("autocomplete=\"off\" name=\"post_form_id\" value=\"(?<gfid>[^<]*)\"");
             Match m = rg.Match(r);
 
